@@ -1,17 +1,9 @@
 <?php
-    echo "<pre>".print_r($_POST,true)."</pre>";
-    echo "in php";
+   $fileType = "image/jpeg";
+   echo "<pre>".print_r($_FILES)."</pre>";
+   $type = pathinfo($fileType,PATHINFO_EXTENSION);
+   echo $type;
+exit;
 ?>
 
-<!DOCTYPE html>
-<html>
-    <head>
-        <title> z </title>
-    </head>
-    <body>
-        <form method="POST"> 
-            <input type="text" name="txt1" id="txt1">
-            <input type="button" name="btn12" id="btn" value="click here">
-        </form>
-    </body>
-</html>
+

@@ -2,6 +2,7 @@
     require 'connection.php';
 
     session_start();
+    $dummy = "images/dummy.png";
     if(!isset($_SESSION['email']))
     {
         header("Location: login.php");
@@ -42,7 +43,10 @@
         $fileName = $phoTO['name'];
         $fileError = $phoTO['error'];
         $filePath = $phoTO['tmp_name'];
-        
+
+        $imgExtarr = array('png','jpg','jpeg');
+        $imgExt = pathinfo($fileName, PATHINFO_EXTENSION);
+
         if($emaIL == "")
         {
             echo "Email ID field is required!";
@@ -87,10 +91,26 @@
                     $updateCmd = $updateCmd . "address = '$addreSS'";
                     $Uflag++;
                 }
+                if($fileError == 4)
+                {
+                    $destFolder = '';
+                }
                 if($fileError == 0)
                 {
                     $destFolder = "images/" . $fileName;
                     move_uploaded_file($filePath, $destFolder);
+                }
+                if (in_array($imgExt, $imgExtarr)) 
+                {
+                    if($fileError == 4)
+                    {
+                        $destFolder = '';
+                    }
+                    if($fileError == 0)
+                    {
+                        $destFolder = "images/" . $fileName;
+                        move_uploaded_file($filePath, $destFolder);
+                    }
                     if($Uflag!=0)
                     {
                         $updateCmd = $updateCmd . ",";
@@ -98,6 +118,10 @@
                     }
                     $updateCmd = $updateCmd . "photo = '$destFolder'";
                     
+                }
+                else{
+                    echo "Only Images are allowed!";
+    
                 }
                 $updateCmd = $updateCmd . " WHERE email = '$emaIL'";
                 $updateResult = mysqli_query($conn,$updateCmd);
@@ -155,9 +179,9 @@
                     <span id="contactError" class="errorMsg"></span>
                 </div>
                 <div class="inputContainer">
-                    <img src="<?php echo  $photo; ?>" width=50 height=50>
+                    <img src="<?php if($rowResult['photo']=='') {echo $dummy;} else {echo $photo;} ?>" width=50 height=50 > 
                     <label for="photo">Upload Photo </label>
-                    <input type="file" name="photo" id="photo"> <br>
+                    <input type="file" name="photo" id="photo" onchange="return imgValid()"> <br>
                     <span id="imgError" class="errorMsg"></span>
                 </div>
                 

@@ -4,9 +4,9 @@ var contact = document.getElementById("contact");
 var email = document.getElementById("email");
 var address = document.getElementById("address");
 var passwd = document.getElementById("passwd");
-// var passwdOld = document.getElementById("passwdOld");
+var photo = document.getElementById("photo");
 var cnfpwd = document.getElementById("cnfpwd");
-var f1=0,f2=0,f3=0,f4=0,f5=0,f6=0,f7=0;
+var f1=0,f2=0,f3=0,f4=0,f5=0,f6=0,f7=0,f8=0;
 // var f8=0;
 
 
@@ -137,11 +137,32 @@ function cnfValid()
         f7=0;
     }
 }
+function imgValid()
+{
+    var pic = photo.value;
+    var imgExt = pic.substring(pic.lastIndexOf('.')+1, pic.length);
+    console.log(pic);
+    console.log(imgExt);
+    var imgExtarr = ['png','jpg','jpeg'];
+    if(!imgExtarr.includes(imgExt))
+    {
+        document.getElementById("imgError").innerHTML = "Only images are allowed!";
+        document.getElementById("imgError").style = "color:red;";
+        f8=1;
+        
+    }
+    else
+    {
+        document.getElementById("imgError").innerHTML = "OK";
+        document.getElementById("imgError").style = "color:green;";
+        f8=0;
+    }
+}
 
 function submitFunc()
 {
-    alert("hello");
-    if(f1==0 && f2==0 && f3==0 && f4==0 && f5==0 && f6==0 && f7==0 )
+   
+    if(f1==0 && f2==0 && f3==0 && f4==0 && f5==0 && f6==0 && f7==0 && f8==0 )
     {
         document.getElementById("regForm").submit();
     }
@@ -149,10 +170,8 @@ function submitFunc()
 }
 function submitFunc2()
 {
-    alert("hello");
-    if(f1==0 && f2==0 && f3==0 && f4==0 && f5==0 && f6==0 && f7==0 )
+    if(f1==0 && f2==0 && f3==0 && f4==0 && f5==0 && f6==0 && f7==0 && f8==0 )
     {
-        alert("inside");
         return true;
     }
     else

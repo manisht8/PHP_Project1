@@ -2,7 +2,7 @@
     require 'connection.php';
 
     session_start();
-
+    $dummy = "images/dummy.png";
     if(!isset($_SESSION['email']))
     {
         header("Location: login.php");
@@ -56,7 +56,7 @@
         </tr>
         <tr>
             <th>Photo</th>
-            <td><img src="<?php echo $rowResult['photo'] ?>" width=50 height=50></td>
+            <td><img src="<?php if($rowResult['photo']=='') {echo $dummy;} else {echo $rowResult['photo'];} ?>" width=50 height=50></td>
         </tr>
     </table>
     <a href="editForm.php"><button class="editBtn"><i class="fa-solid fa-pencil"></i> Edit Profile </button> </a>

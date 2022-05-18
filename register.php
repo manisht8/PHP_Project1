@@ -12,7 +12,7 @@
         $photo = $_FILES['photo'];
         $passwd = $_POST['passwd'];
         $cnfpwd = $_POST['cnfpwd'];
-        echo "<pre>".print_r($_FILES)."</pre>";
+        // echo "<pre>".print_r($_FILES)."</pre>";
         
         $dupli=0;
 
@@ -35,9 +35,11 @@
         {
             $strong_pwd = password_hash($passwd,PASSWORD_BCRYPT);
             $fileName = $photo['name'];
-            $fileType = $photo['type'];
             $fileError = $photo['error'];
             $filePath = $photo['tmp_name'];
+
+            $imgExtarr = array('png','jpg','jpeg');
+            $imgExt = pathinfo($fileName, PATHINFO_EXTENSION);
 
             if($fileError == 4)
             {
@@ -48,8 +50,17 @@
                 $destFolder = "images/" . $fileName;
                 move_uploaded_file($filePath, $destFolder);
             }
-            if($fileType)
-                
+            if (in_array($imgExt, $imgExtarr)) 
+            {
+                if($fileError == 4)
+                {
+                    $destFolder = '';
+                }
+                if($fileError == 0)
+                {
+                    $destFolder = "images/" . $fileName;
+                    move_uploaded_file($filePath, $destFolder);
+                }
                 $insertCmd = "INSERT INTO user_info VALUES('$email','$fname','$lname','$address',$contact,'$destFolder','$strong_pwd')";
                 $insertResult = mysqli_query($conn,$insertCmd);
                 if($insertResult)
@@ -64,8 +75,13 @@
                         // die(mysqli_error($conn));
                 }
             }
+            else{
+                echo "Only Images are allowed!";
+
+            }
             
-        }     
+        }  
+    }   
     
 ?>
 <!DOCTYPE html>
@@ -107,7 +123,7 @@
                 </div>
                 <div class="inputContainer">
                     <label for="photo">Upload Photo </label>
-                    <input type="file" name="photo" id="photo"> <br>
+                    <input type="file" name="photo" id="photo" onchange="return imgValid()"> <br>
                     <span id="imgError" class="errorMsg"></span>
                 </div>
                 <div class="inputContainer">
