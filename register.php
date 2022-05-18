@@ -41,15 +41,7 @@
             $imgExtarr = array('png','jpg','jpeg');
             $imgExt = pathinfo($fileName, PATHINFO_EXTENSION);
 
-            if($fileError == 4)
-            {
-                $destFolder = '';
-            }
-            if($fileError == 0)
-            {
-                $destFolder = "images/" . $fileName;
-                move_uploaded_file($filePath, $destFolder);
-            }
+            
             if (in_array($imgExt, $imgExtarr)) 
             {
                 if($fileError == 4)
