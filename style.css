@@ -1,0 +1,73 @@
+/* Login and register form */
+
+.errorMsg {
+    color: red;
+    font-weight: bold;
+}
+
+.formContainer {
+    padding: 15px;
+    border-radius: 8px;
+    margin-top:5px;
+}
+
+.inputContainer {
+    margin-top: 5px;
+}
+
+.inputContainer input {
+    border-radius: 3px;
+}
+
+textarea {
+    resize: none;
+}
+
+table {
+    /* border: 2px solid black; */
+    padding: 5px;
+    width:50vw;
+    margin:auto;
+}
+
+td, th {
+    padding: 5px;
+    margin: 3px;
+    /* border: 1px solid black; */
+}
+th {
+    color: rgb(28, 83, 178);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+a {
+    text-decoration: none;
+    text-transform: none;
+}
+
+#bannerImg {
+    background-color: #b7bbc6;
+    height: 100vh;
+    text-align: center;
+}
+
+#bannerImg h1 {
+    color: rgb(28, 83, 178);
+}
+#bannerImg h2 {
+    padding-top: 48vh;
+    color: rgb(28, 83, 178);
+}
+
+#bannerImg button, .editBtn {
+    color: white;
+    background-color: rgb(32, 157, 203);
+    border: none;
+    padding: 7px;
+    border-radius: 10%;
+    cursor: pointer;
+}
